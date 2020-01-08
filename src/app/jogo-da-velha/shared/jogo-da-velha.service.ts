@@ -290,5 +290,18 @@ export class JogoDaVelhaService {
     return exibirVitoria
   }
 
+  /**
+   * Inicializa um novo jogo e exibe o tabuleiro
+   * 
+   * @return void
+   * 
+   */
+  novoJogo(): void{
+    this.inicializar()
+    this._showFinal = false
+    this._showInicio = false
+    this._showTabuleiro = true
+  }
+  
 
 }
