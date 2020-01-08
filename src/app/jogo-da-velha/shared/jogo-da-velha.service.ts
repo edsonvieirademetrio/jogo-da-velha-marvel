@@ -180,6 +180,39 @@ export class JogoDaVelhaService {
     return fim
   }
 
-  
+  /**
+   * Implementação da lógica da jogada do CPU em modo aleatório
+   * 
+   * @return void
+   * 
+   */
+  cpuJogar(): void{
+   //Verifica se é uma jogada de vitória
+   let jogada: number[] = this.obterJogada(this.O)
+   
+   if(jogada.length <= 0){
+     //tenta jogar para evitar perder
+     jogada = this.obterJogada(this.X)
+   }
+
+   if(jogada.length <= 0){
+     //joga de forma aleatória
+     let jogadas: any = []
+     for(let i=0; i<this.TAM_TAB; i++){
+       for(let j=0; j<this.TAM_TAB; j++){
+         if(this.tabuleiro[i][j] === this.VAZIO){
+           jogadas.push([i, j])
+         }
+       }
+     }
+     let k = Math.floor((Math.random() * (jogadas.length -1)))
+     jogada = [jogadas[k][0], jogadas[k][1]]
+   }
+
+   this.tabuleiro[jogada[0]][jogada[1]] = this._jogador
+   this.numMovimentos ++
+   this.vitoria = this.fimJogo(jogada[0], jogada[1], this.tabuleiro, this._jogador)
+   this._jogador = (this._jogador === this.X) ? this.O : this.X
+  }
 
 }
