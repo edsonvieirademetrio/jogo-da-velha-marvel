@@ -34,4 +34,78 @@ export class JogoDaVelhaService {
 
 
   constructor() { }
+
+  /**
+   * Primeiro método: Inicializa o jogo e define a exibição da tela de início
+   * 
+   * @return void
+   */
+  inicializar(): void{
+    this._showInicio = true
+    this._showTabuleiro = false
+    this._showFinal = false
+    this.numMovimentos = 0
+    this._jogador = this.X
+    this.vitoria = false
+    this.inicializarTabuleiro()
+  }
+
+  /**
+   * Inicia o tabuleiro do jogo com todas as posições VAZIAS
+   * 
+   * @return void
+   */
+  inicializarTabuleiro(): void{
+    this.tabuleiro = [this.TAM_TAB]
+    for(let i=0; i < this.TAM_TAB; i++){
+      this.tabuleiro[i] = [this.VAZIO, this.VAZIO, this.VAZIO]
+    }
+  }
+
+  /**
+   * Obtem se a tela de inicio deve ser exibida
+   * 
+   * @return boolean
+   */
+  get showInicio(): boolean{
+    return this._showInicio
+  }
+
+  /**
+   * Obtem se o tabuleiro deve ser exibido
+   * 
+   * @return boolean
+   */
+  get showTabuleiro(): boolean{
+    return this._showTabuleiro
+  }
+
+  /**
+   * Obtem se a tela final deve ser exibida
+   * 
+   * @return boolean
+   */
+  get showFinal():boolean{
+    return this._showFinal
+  }
+
+  /**
+   * Obtem qual jogador vai jogar
+   * 
+   * @return number
+   */
+  get jogador(): number{
+    return this._jogador
+  }
+
+  /**
+   * Cria a inicialização do jogo e exibe o tabuleiro
+   * 
+   * @return void
+   */
+  iniciarJogo(): void{
+    this._showInicio = false
+    this._showTabuleiro = true
+  }
+
 }
