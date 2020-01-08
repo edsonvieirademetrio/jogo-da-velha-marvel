@@ -209,10 +209,15 @@ export class JogoDaVelhaService {
      jogada = [jogadas[k][0], jogadas[k][1]]
    }
 
+    //Executa a jogada
    this.tabuleiro[jogada[0]][jogada[1]] = this._jogador
    this.numMovimentos ++
    this.vitoria = this.fimJogo(jogada[0], jogada[1], this.tabuleiro, this._jogador)
    this._jogador = (this._jogador === this.X) ? this.O : this.X
-  }
+
+  }  
+
+  
+
 
 }
