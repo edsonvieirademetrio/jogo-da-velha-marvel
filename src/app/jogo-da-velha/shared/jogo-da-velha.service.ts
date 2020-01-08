@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { privateEncrypt } from 'crypto';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,7 @@ export class JogoDaVelhaService {
   //Define um jogador
   private readonly X: number = 1
   //Define outro jogador
-  private readonly 0: number = 2
+  private readonly O: number = 2
   //Terceiro Estado
   private readonly VAZIO: number = 0
 
@@ -90,7 +89,7 @@ export class JogoDaVelhaService {
   }
 
   /**
-   * Obtem qual jogador vai jogar
+   * Obtem qual o jogador está jogando
    * 
    * @return number
    */
@@ -107,5 +106,80 @@ export class JogoDaVelhaService {
     this._showInicio = false
     this._showTabuleiro = true
   }
+
+  /**
+   * Executa a jogada de acordo com as coordenadas do tabuleiro
+   * 
+   * @param number posX
+   * @param number posY
+   * @return void
+   * 
+   */
+  jogar(posX: number, posY:number): void{
+    //verifica se a jogada é válida
+    if(this.tabuleiro[posX][posY] !== this.VAZIO || this.vitoria){
+      return
+    }
+
+    //Executa a jogada
+    this.tabuleiro[posX][posY] = this._jogador
+    this.numMovimentos ++
+    this.vitoria = this.fimJogo(posX, posY, this.tabuleiro, this._jogador)
+    this._jogador = (this._jogador === this.X ? this.O : this.X)
+
+    //Executa a jogada do PC
+    if(!this.vitoria && this.numMovimentos < 9){
+      this.cpuJogar()
+    }
+
+    //Verifica se alguém venceu
+    if(this.vitoria !== false){
+      this._showFinal = true
+    }
+
+    //Verifica se empatou
+    if(!this.vitoria && this.numMovimentos === 9){
+      this._jogador = 0
+      this._showFinal = true
+    }
+
+  }
+
+  /**
+   * Executa a finalização do jogo
+   * 
+   * @param number linha
+   * @param number coluna
+   * @param any tabuleiro
+   * @param number jogador
+   * @return array
+   * 
+   */
+  fimJogo(linha: number, coluna:number, tabuleiro: any, jogador: number){
+
+    let fim: any = false
+
+    //Verifica se é uma linha válida
+    if(tabuleiro[linha][0] === jogador && tabuleiro[linha][1] === jogador && tabuleiro[linha][2] === jogador){
+      fim = [[linha, 0], [linha, 1], [linha, 2]]
+    }
+
+    //Verifica se é uma coluna válida
+    if(tabuleiro[0][coluna] === jogador && tabuleiro[1][coluna] === jogador && tabuleiro[2][coluna]){
+      fim = [[0, coluna], [1, coluna], [2, coluna]]
+    }
+
+    //Verifica se as diagonais são válidas
+    if(tabuleiro[0][0] === jogador && tabuleiro[1][1] === jogador && tabuleiro[2][2] === jogador){
+      fim = [[0, 0], [1, 1], [2, 2]]
+    }
+    if(tabuleiro[0][2] === jogador && tabuleiro[1][1] === jogador && tabuleiro[2][0] === jogador){
+      fim = [[0,2], [1,1], [2,0]]
+    }
+
+    return fim
+  }
+
+  
 
 }
