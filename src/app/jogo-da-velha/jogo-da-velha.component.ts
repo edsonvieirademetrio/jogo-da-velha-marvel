@@ -57,4 +57,57 @@ export class JogoDaVelhaComponent implements OnInit {
     this.jogoDaVelhaService.iniciarJogo()
   }
 
+  /**
+   * Efetua uma jogada ao clicar em uma das casas do tabuleiro
+   * 
+   * @param number posX
+   * @param number posY
+   * @return void
+   * 
+   */
+  jogar(posX: number, posY: number): void{
+    this.jogoDaVelhaService.jogar(posX, posY)
+  }
+
+  /**
+   * Obtém se é a peça X que deve ser exibida para a coordenada informada
+   * 
+   * @param number posX
+   * @param number pos Y
+   * @return boolean
+   * 
+   */
+  exibirX(posX: number, posY: number): boolean{
+    return this.jogoDaVelhaService.exibirX(posX, posY)
+  }
+
+  /**
+   * Obtém se é a peça O que deve ser exibida para a coordenada informada
+   * 
+   * @param number posX
+   * @param number pos Y
+   * @return boolean
+   * 
+   */
+  exibirO(posX: number, posY: number): boolean{
+    return this.jogoDaVelhaService.exibirO(posX, posY)
+  }
+
+  /**
+   * Obtém se deve exibir a vitória para a coordenada informada
+   * 
+   * @param number posX
+   * @param number pos Y
+   * @return boolean
+   * 
+   */
+  exibirVitoria(posX: number, posY: number): boolean{
+    return this.jogoDaVelhaService.exibirVitoria(posX, posY)
+  }
+
+  
+
+
+
+
 }
