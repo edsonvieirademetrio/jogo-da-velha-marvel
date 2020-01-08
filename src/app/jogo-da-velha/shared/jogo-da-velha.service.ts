@@ -217,7 +217,78 @@ export class JogoDaVelhaService {
 
   }  
 
-  
+  /**
+   * Obter uma jogada válida para um jogador vencer
+   * 
+   * @param number jogador
+   * @return []
+   * 
+   */
+  obterJogada(jogador: number){
+    let tab = this.tabuleiro
+    for(let lin = 0; lin < this.TAM_TAB; lin++){
+      for(let col = 0; col < this.TAM_TAB; col++){
+        if(tab[lin][col] != this.VAZIO){
+          continue
+        }
+        tab[lin][col] = jogador
+        if(this.fimJogo(lin, col, tab, jogador)){
+          return [lin, col]
+        }
+        tab[lin][col] = this.VAZIO
+      }
+    }
+    return []
+  }
+
+  /**
+   * Retorna se a peça X deve ser exibida para a coordenada informada
+   * 
+   * @param number posX
+   * @param number posY
+   * @return boolean
+   * 
+   */
+  exibirX(posX:number, posY:number): boolean{
+    return this.tabuleiro[posX][posY] === this.X
+  }
+
+  /**
+   * Retorna se a peça O deve ser exibida para a coordenada informada
+   * 
+   * @param number posX
+   * @param number posY
+   * @return boolean
+   * 
+   */
+  exibirO(posX:number, posY:number): boolean{
+    return this.tabuleiro[posX][posY] === this.O
+  }
+
+  /**
+   * Retorna se deve ser exibida a marcação de vitória para a coordenada informada
+   * 
+   * @param number posX
+   * @param number posY
+   * @return boolean
+   * 
+   */
+  exibirVitoria(posX: number, posY: number): boolean{
+    let exibirVitoria: boolean = false
+
+    if(!this.vitoria){
+      return exibirVitoria
+    }
+
+    for(let pos of this.vitoria){
+      if(pos[0] === posX && pos[1] === posY){
+        exibirVitoria = true
+        break
+      }
+    }
+
+    return exibirVitoria
+  }
 
 
 }
