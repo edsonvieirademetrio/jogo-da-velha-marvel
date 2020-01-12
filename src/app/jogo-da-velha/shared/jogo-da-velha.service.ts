@@ -302,6 +302,16 @@ export class JogoDaVelhaService {
     this._showInicio = false
     this._showTabuleiro = true
   }
+
+  sorteioJogador():number{
+    // retorna um número aleatório entre 0 - 9
+    let numeroSorteado = Math.floor(Math.random() * 10); 
+    if (numeroSorteado >= 5){
+      return 1
+    }else{
+      return 2
+    }
+  }
   
 
 }

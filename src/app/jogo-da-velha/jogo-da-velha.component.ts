@@ -54,7 +54,16 @@ export class JogoDaVelhaComponent implements OnInit {
    * 
    */
   iniciarJogo(): void{
-    this.jogoDaVelhaService.iniciarJogo()
+
+    let jogadorInicio = this.jogoDaVelhaService.sorteioJogador()
+    if(jogadorInicio == 1){
+      this.jogoDaVelhaService.iniciarJogo()
+    }else{
+      this.jogoDaVelhaService.iniciarJogo()
+      this.jogoDaVelhaService.cpuJogar()
+
+    }
+
   }
 
   /**
@@ -105,7 +114,32 @@ export class JogoDaVelhaComponent implements OnInit {
     return this.jogoDaVelhaService.exibirVitoria(posX, posY)
   }
 
-  
+  /**
+   * Obtém o número do último que jogou
+   * 
+   * @return number
+   * 
+   */
+  get jogador(): number{
+    return this.jogoDaVelhaService.jogador
+  }
+
+  /**
+   * Dá inicio a um novo jogo
+   * 
+   * @return void
+   * 
+   */
+  novoJogo(): void{   
+    let jogadorInicio = this.jogoDaVelhaService.sorteioJogador()
+    if(jogadorInicio == 1){
+      this.jogoDaVelhaService.novoJogo()
+    }else{
+      this.jogoDaVelhaService.novoJogo()
+      this.jogoDaVelhaService.cpuJogar()
+
+    }
+  }
 
 
 
