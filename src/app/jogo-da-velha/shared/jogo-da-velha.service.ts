@@ -84,7 +84,7 @@ export class JogoDaVelhaService {
    * 
    * @return boolean
    */
-  get showFinal():boolean{
+  get showFinal():boolean{    
     return this._showFinal
   }
 
@@ -176,7 +176,6 @@ export class JogoDaVelhaService {
     if(tabuleiro[0][2] === jogador && tabuleiro[1][1] === jogador && tabuleiro[2][0] === jogador){
       fim = [[0,2], [1,1], [2,0]]
     }
-
     return fim
   }
 
@@ -277,7 +276,7 @@ export class JogoDaVelhaService {
     let exibirVitoria: boolean = false
 
     if(!this.vitoria){
-      return exibirVitoria
+      return exibirVitoria      
     }
 
     for(let pos of this.vitoria){
