@@ -1,4 +1,4 @@
-div {
+div.tabuleiro {
     width: 400px;
     height: 400px;
     text-align: center;
@@ -60,4 +60,17 @@ ul li {
 
 .kz-cor-vitoria {
     background-color: lightgreen;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.wrapper>div {
+    border: 2px solid #ffa94d;
 }

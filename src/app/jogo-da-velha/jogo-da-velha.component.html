@@ -1,6 +1,41 @@
-<div>
+<div class="">
     <h2>Jogo da velha</h2>
 
+    <div *ngFor="let jogador of todosJogadores | slice:0:3; let i=index" class="box-externo">
+        <div *ngFor="let h of jogador">
+            <div class="box-interno">
+                {{ h.nome}}
+                <br>
+                <img src="{{ h.thumbnail }}" width="80px" />
+            </div>
+        </div>
+    </div>
+
+    <h4>Placar</h4>
+    <div class="wrapper">
+        <div>
+            Jogador 01: {{placarJogador01}}
+        </div>
+        <div>
+            Jogador 02: {{placarJogador02}}
+        </div>
+    </div>
+    <div class="wrapper">
+        <div>
+            <form [formGroup]="formularioDeJogador" (ngSubmit)="getJogadores()">
+                <h4>Escolha os jogadores</h4>
+                <div>
+                    <label for="nome">Nome: </label>
+                    <input type="text" formControlName="nome">
+                </div>
+                <div>
+                    <button>Escolher</button>
+
+                </div>
+            </form>
+        </div>
+
+    </div>
     <!-- tela inicial -->
     <div class="principal" *ngIf="showInicio">
         <a href="#" class="botao" (click)="iniciarJogo()">
@@ -10,7 +45,7 @@
     <!-- fim tela inicial -->
 
     <!-- tabuleiro -->
-    <div *ngIf="showTabuleiro">
+    <div *ngIf="showTabuleiro" class="tabuleiro">
         <ul>
             <li class="kz-border-bottom kz-border-right" [ngClass]="{
                 'kz-img-x': exibirX(0,0),
@@ -71,8 +106,8 @@
     <!-- tela final -->
     <div *ngIf="showFinal">
         <span>
-        <p *ngIf="jogador==2">Você venceu!!!</p>
-        <p *ngIf="jogador==1">Você perdeu...</p>
+        <p *ngIf="jogador==2">Você venceu!!! </p>
+        <p *ngIf="jogador==1">Você perdeu... </p>
         <p *ngIf="jogador==0">O jogo terminou empatado...</p>
         <br />
         <a href="#" class="botao" (click)="novoJogo()">
