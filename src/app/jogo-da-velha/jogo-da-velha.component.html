@@ -28,7 +28,7 @@
               'kz-img-x': exibirX(0,2),
               'kz-img-o': exibirO(0,2),
               'kz-cor-vitoria': exibirVitoria(0,2)
-            }" (click)="jogar(0,0)">
+            }" (click)="jogar(0,2)">
             </li>
             <li class="kz-border-bottom kz-border-right" [ngClass]="{
               'kz-img-x': exibirX(1,0),
@@ -60,10 +60,10 @@
               'kz-cor-vitoria': exibirVitoria(2,1)
             }" (click)="jogar(2,1)"></li>
             <li [ngClass]="{
-              'kz-img-x': exibirX(2,1),
-              'kz-img-o': exibirO(2,1),
-              'kz-cor-vitoria': exibirVitoria(2,1)
-            }" (click)="jogar(2,1)"></li>
+              'kz-img-x': exibirX(2,2),
+              'kz-img-o': exibirO(2,2),
+              'kz-cor-vitoria': exibirVitoria(2,2)
+            }" (click)="jogar(2,2)"></li>
         </ul>
     </div>
     <!-- fim tabuleiro -->
@@ -71,13 +71,12 @@
     <!-- tela final -->
     <div *ngIf="showFinal">
         <span>
-      <p>Você venceu!!!</p>
-      <p>Você perdeu...</p>
-      <p>O jogo terminou empatado...</p>
-      <br />
-      <a href="#" 
-           class="botao">
-           Jogar novamente
+        <p *ngIf="jogador==2">Você venceu!!!</p>
+        <p *ngIf="jogador==1">Você perdeu...</p>
+        <p *ngIf="jogador==0">O jogo terminou empatado...</p>
+        <br />
+        <a href="#" class="botao" (click)="novoJogo()">
+          Jogar novamente
         </a>
       </span>
     </div>
