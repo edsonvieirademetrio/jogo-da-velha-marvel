@@ -1,120 +1,121 @@
-<div class="">
-    <h2>Jogo da velha</h2>
+<div class="page">
+    <div class="container">
+        <h1 class="text-center">Jogo da velha</h1>
 
-    <div *ngFor="let jogador of todosJogadores | slice:0:3; let i=index" class="box-externo">
-        <div *ngFor="let h of jogador">
-            <div class="box-interno">
-                {{ h.nome}}
-                <br>
-                <img src="{{ h.thumbnail }}" width="80px" />
+        <!-- tabuleiro -->
+        <div *ngIf="showTabuleiro" class="tabuleiro m-auto">
+            <ul>
+                <li class="kz-border-bottom kz-border-right" [ngClass]="{
+              'kz-img-x': exibirX(0,0),
+              'kz-img-o': exibirO(0,0),
+              'kz-cor-vitoria': exibirVitoria(0,0)
+            }" (click)="jogar(0,0)">
+                </li>
+                <li class="kz-border-bottom kz-border-right" [ngClass]="{
+            'kz-img-x': exibirX(0,1),
+            'kz-img-o': exibirO(0,1),
+            'kz-cor-vitoria': exibirVitoria(0,1)
+          }" (click)="jogar(0,1)">
+                </li>
+                <li class="kz-border-bottom" [ngClass]="{
+            'kz-img-x': exibirX(0,2),
+            'kz-img-o': exibirO(0,2),
+            'kz-cor-vitoria': exibirVitoria(0,2)
+          }" (click)="jogar(0,2)">
+                </li>
+                <li class="kz-border-bottom kz-border-right" [ngClass]="{
+            'kz-img-x': exibirX(1,0),
+            'kz-img-o': exibirO(1,0),
+            'kz-cor-vitoria': exibirVitoria(1,0)
+          }" (click)="jogar(1,0)">
+                </li>
+                <li class="kz-border-bottom kz-border-right" [ngClass]="{
+            'kz-img-x': exibirX(1,1),
+            'kz-img-o': exibirO(1,1),
+            'kz-cor-vitoria': exibirVitoria(1,1)
+          }" (click)="jogar(1,1)">
+                </li>
+                <li class="kz-border-bottom" [ngClass]="{
+            'kz-img-x': exibirX(1,2),
+            'kz-img-o': exibirO(1,2),
+            'kz-cor-vitoria': exibirVitoria(1,2)
+          }" (click)="jogar(1,2)">
+                </li>
+                <li class="kz-border-right" [ngClass]="{
+            'kz-img-x': exibirX(2,0),
+            'kz-img-o': exibirO(2,0),
+            'kz-cor-vitoria': exibirVitoria(2,0)
+          }" (click)="jogar(2,0)">
+                </li>
+                <li class="kz-border-right" [ngClass]="{
+            'kz-img-x': exibirX(2,1),
+            'kz-img-o': exibirO(2,1),
+            'kz-cor-vitoria': exibirVitoria(2,1)
+          }" (click)="jogar(2,1)"></li>
+                <li [ngClass]="{
+            'kz-img-x': exibirX(2,2),
+            'kz-img-o': exibirO(2,2),
+            'kz-cor-vitoria': exibirVitoria(2,2)
+          }" (click)="jogar(2,2)"></li>
+            </ul>
+        </div>
+        <!-- fim tabuleiro -->
+
+        <!-- tela inicial -->
+        <div class="principal m-auto text-center" *ngIf="showInicio">
+            <a href="#" class="botao" (click)="iniciarJogo()">
+                Iniciar
+            </a>
+        </div>
+        <!-- fim tela inicial -->
+
+        <!-- tela final -->
+        <div *ngIf="showFinal" class="text-center m-auto">
+            <a href="#" class="botao" (click)="novoJogo()">
+            Jogar novamente
+          </a>
+        </div>
+        <!-- fim tela final -->
+
+        <div *ngIf="formularioJogador" class="formulario-jogador text-center m-auto">
+            <div>
+                <form [formGroup]="formularioDeJogador" (ngSubmit)="getJogadores()">
+                    <h4>Escolha os personagens Marvel</h4>
+                    <div>
+                        <label for="nome">Nome: </label>
+                        <input type="text" formControlName="nome">
+                    </div>
+                    <div>
+                        <button>Escolher</button>
+                        <button (click)="reset()">Reset</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="placar">
+            <h2 class="text-center">Placar</h2>
+            <div class="wrapper">
+                <div class="placar01 text-center">
+                    Jogador 01: <span class="result">{{placarJogador01}}</span>
+                </div>
+                <div class="placar02 text-center">
+                    Jogador 02: <span class="result">{{placarJogador02}}</span>
+                </div>
             </div>
         </div>
-    </div>
 
-    <h4>Placar</h4>
-    <div class="wrapper">
-        <div>
-            Jogador 01: {{placarJogador01}}
-        </div>
-        <div>
-            Jogador 02: {{placarJogador02}}
-        </div>
-    </div>
-    <div class="wrapper">
-        <div>
-            <form [formGroup]="formularioDeJogador" (ngSubmit)="getJogadores()">
-                <h4>Escolha os jogadores</h4>
-                <div>
-                    <label for="nome">Nome: </label>
-                    <input type="text" formControlName="nome">
+        <div *ngFor="let jogador of todosJogadores | slice:0:2; let i=index" class="box-externo">
+            <div *ngFor="let h of jogador">
+                <div class="box-interno">
+                    {{ h.nome}}
+                    <br>
+                    <img src="{{ h.thumbnail }}" width="80px" />
                 </div>
-                <div>
-                    <button>Escolher</button>
-
-                </div>
-            </form>
+            </div>
         </div>
 
-    </div>
-    <!-- tela inicial -->
-    <div class="principal" *ngIf="showInicio">
-        <a href="#" class="botao" (click)="iniciarJogo()">
-         Iniciar
-      </a>
-    </div>
-    <!-- fim tela inicial -->
 
-    <!-- tabuleiro -->
-    <div *ngIf="showTabuleiro" class="tabuleiro">
-        <ul>
-            <li class="kz-border-bottom kz-border-right" [ngClass]="{
-                'kz-img-x': exibirX(0,0),
-                'kz-img-o': exibirO(0,0),
-                'kz-cor-vitoria': exibirVitoria(0,0)
-              }" (click)="jogar(0,0)">
-            </li>
-            <li class="kz-border-bottom kz-border-right" [ngClass]="{
-              'kz-img-x': exibirX(0,1),
-              'kz-img-o': exibirO(0,1),
-              'kz-cor-vitoria': exibirVitoria(0,1)
-            }" (click)="jogar(0,1)">
-            </li>
-            <li class="kz-border-bottom" [ngClass]="{
-              'kz-img-x': exibirX(0,2),
-              'kz-img-o': exibirO(0,2),
-              'kz-cor-vitoria': exibirVitoria(0,2)
-            }" (click)="jogar(0,2)">
-            </li>
-            <li class="kz-border-bottom kz-border-right" [ngClass]="{
-              'kz-img-x': exibirX(1,0),
-              'kz-img-o': exibirO(1,0),
-              'kz-cor-vitoria': exibirVitoria(1,0)
-            }" (click)="jogar(1,0)">
-            </li>
-            <li class="kz-border-bottom kz-border-right" [ngClass]="{
-              'kz-img-x': exibirX(1,1),
-              'kz-img-o': exibirO(1,1),
-              'kz-cor-vitoria': exibirVitoria(1,1)
-            }" (click)="jogar(1,1)">
-            </li>
-            <li class="kz-border-bottom" [ngClass]="{
-              'kz-img-x': exibirX(1,2),
-              'kz-img-o': exibirO(1,2),
-              'kz-cor-vitoria': exibirVitoria(1,2)
-            }" (click)="jogar(1,2)">
-            </li>
-            <li class="kz-border-right" [ngClass]="{
-              'kz-img-x': exibirX(2,0),
-              'kz-img-o': exibirO(2,0),
-              'kz-cor-vitoria': exibirVitoria(2,0)
-            }" (click)="jogar(2,0)">
-            </li>
-            <li class="kz-border-right" [ngClass]="{
-              'kz-img-x': exibirX(2,1),
-              'kz-img-o': exibirO(2,1),
-              'kz-cor-vitoria': exibirVitoria(2,1)
-            }" (click)="jogar(2,1)"></li>
-            <li [ngClass]="{
-              'kz-img-x': exibirX(2,2),
-              'kz-img-o': exibirO(2,2),
-              'kz-cor-vitoria': exibirVitoria(2,2)
-            }" (click)="jogar(2,2)"></li>
-        </ul>
     </div>
-    <!-- fim tabuleiro -->
-
-    <!-- tela final -->
-    <div *ngIf="showFinal">
-        <span>
-        <p *ngIf="jogador==2">Você venceu!!! </p>
-        <p *ngIf="jogador==1">Você perdeu... </p>
-        <p *ngIf="jogador==0">O jogo terminou empatado...</p>
-        <br />
-        <a href="#" class="botao" (click)="novoJogo()">
-          Jogar novamente
-        </a>
-      </span>
-    </div>
-    <!-- fim tela final -->
-
 </div>
