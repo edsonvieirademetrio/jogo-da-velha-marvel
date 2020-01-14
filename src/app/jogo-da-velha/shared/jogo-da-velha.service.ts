@@ -29,6 +29,8 @@ export class JogoDaVelhaService {
   private _showTabuleiro: boolean
   //Terceiro Estado
   private _showFinal: boolean
+  //Formulario de Jogador
+  private formularioJogador:boolean
 
 
 
@@ -47,6 +49,7 @@ export class JogoDaVelhaService {
     this._jogador = this.X
     this.vitoria = false
     this.inicializarTabuleiro()
+    this.formularioJogador = true
   }
 
   /**

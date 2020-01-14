@@ -29,6 +29,7 @@ export class JogoDaVelhaComponent implements OnInit {
   placarJogador01:number = 0
   placarJogador02:number = 0
   numJogadores:any = 0
+  formularioJogador: boolean = false
 
   ngOnInit() {
 
@@ -77,7 +78,7 @@ export class JogoDaVelhaComponent implements OnInit {
    * 
    */
   iniciarJogo(): void{
-
+    this.formularioJogador = true
     let jogadorInicio = this.jogoDaVelhaService.sorteioJogador()
     if(jogadorInicio == 1){
       this.jogoDaVelhaService.iniciarJogo()
@@ -223,6 +224,10 @@ export class JogoDaVelhaComponent implements OnInit {
         return false
       }      
     }
+  }
+
+  reset() {
+    location.reload()
   }
   
 
